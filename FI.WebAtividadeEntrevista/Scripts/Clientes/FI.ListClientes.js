@@ -14,7 +14,11 @@ $(document).ready(function () {
             fields: {
                 Nome: {
                     title: 'Nome',
-                    width: '50%'
+                    width: '40%'
+                },
+                CPF: {
+                    title: 'CPF',
+                    width: '25%'
                 },
                 Email: {
                     title: 'Email',

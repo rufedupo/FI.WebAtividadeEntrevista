@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using FI.AtividadeEntrevista.DML;
+using WebAtividadeEntrevista.Utils;
 
 namespace WebAtividadeEntrevista.Controllers
 {
@@ -38,22 +39,37 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                
-                model.Id = bo.Incluir(new Cliente()
-                {                    
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
-                });
+                try
+                {
+                    if (!bo.VerificarExistencia(model.CPF))
+                    {
+                        model.Id = bo.Incluir(new Cliente()
+                        {
+                            CEP = model.CEP,
+                            Cidade = model.Cidade,
+                            Email = model.Email,
+                            Estado = model.Estado,
+                            Logradouro = model.Logradouro,
+                            Nacionalidade = model.Nacionalidade,
+                            Nome = model.Nome,
+                            CPF = model.CPF,
+                            Sobrenome = model.Sobrenome,
+                            Telefone = model.Telefone
+                        });
 
-           
-                return Json("Cadastro efetuado com sucesso");
+                        return Json(ClienteMsg.INF0001);
+                    }
+                    else
+                        throw new Exception(ClienteMsg.EXC0001);
+                } 
+                catch (Exception ex)
+                {
+                    Response.StatusCode = 400;
+                    
+                    List<string> erros = new List<string>();
+                    erros.Add(ex.Message);
+                    return Json(string.Join(Environment.NewLine, erros));
+                }
             }
         }
 

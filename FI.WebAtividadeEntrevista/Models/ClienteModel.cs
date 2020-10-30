@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebAtividadeEntrevista.Validations;
 
 namespace WebAtividadeEntrevista.Models
 {
@@ -28,7 +29,7 @@ namespace WebAtividadeEntrevista.Models
         /// <summary>
         /// E-mail
         /// </summary>
-        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Digite um e-mail válido")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "E-mail inválido")]
         public string Email { get; set; }
 
         /// <summary>
@@ -55,6 +56,13 @@ namespace WebAtividadeEntrevista.Models
         /// </summary>
         [Required]
         public string Nome { get; set; }
+
+        /// <summary>
+        /// CPF
+        /// </summary>
+        [Required]
+        [CustomValidationCPF(ErrorMessage = "CPF inválido")]
+        public string CPF { get; set; }
 
         /// <summary>
         /// Sobrenome
