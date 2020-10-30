@@ -1,8 +1,37 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#CPF").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
     $("#CEP").inputmask("mask", { "mask": "99.999-999" }, { reverse: true });
     $("#Telefone").inputmask("mask", { "mask": "(99) 9 9999-9999" }, { reverse: true });
+
+    $("#CPFBeneficiario").inputmask("mask", { "mask": "999.999.999-99" }, { reverse: true });
+
+    $("#incluirBeneficiario").click(function (e) {
+        var CPFBeneficiario = Unmask($("#CPFBeneficiario").val());
+        var NomeBeneficiario = $("#NomeBeneficiario").val();
+        urlBeneficiario = "/Beneficiario/AddBeneficiario";
+        
+        $.ajax({
+            url: urlBeneficiario,
+            method: "POST",
+            data: {
+                "NOME": NomeBeneficiario,
+                "CPF": CPFBeneficiario
+            },
+            error:
+                function (r) {
+                    if (r.status == 400) {
+                        var res = r.responseJSON.replace("\r\n", " | ");
+                        ModalDialog("Ocorreu um erro", res);
+                    } else if (r.status == 500)
+                        ModalDialog("Ocorreu um erro", "Ocorreu um erro interno no servidor.");
+                },
+            success:
+                function (r) {
+                    ModalDialog("Sucesso!", r);
+                    $("#beneficiariosModal").modal('hide');
+                },
+        });
+    });
 
     $('#formCadastro').submit(function (e) {
         var cpfStr = Unmask($(this).find("#CPF").val());

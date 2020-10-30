@@ -20,6 +20,8 @@ namespace WebAtividadeEntrevista.Controllers
 
         public ActionResult Incluir()
         {
+            List<FI.AtividadeEntrevista.DML.Beneficiario> beneficiarios = new BoBeneficiario().Listar(0);
+            ViewBag.Beneficiarios = beneficiarios;
             return View();
         }
 

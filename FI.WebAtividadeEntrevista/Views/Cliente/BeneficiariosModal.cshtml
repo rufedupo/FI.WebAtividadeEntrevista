@@ -1,0 +1,60 @@
+﻿<div class="modal fade" id="beneficiariosModal" tabindex="-1" role="dialog" aria-labelledby="beneficiariosModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="beneficiariosModalLabel">
+                    Beneficiários
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="CPF">CPF:</label>
+                            <input required="required" type="text" class="form-control" id="CPFBeneficiario" name="CPFBeneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="Nome">Nome:</label>
+                            <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: João da Silva" maxlength="255">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group" style="padding-top: 25px">
+                            <button id="incluirBeneficiario" class="btn btn-success">Incluir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>CPF</th>
+                            <th>Nome</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Beneficiarios)
+                        {
+                        <tr>
+                            <td>@item.CPF</td>
+                            <td>@item.Nome</td>
+                            <td><button class="btn btn-primary">Alterar</button></td>
+                            <td><button class="btn btn-primary">Excluir</button></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -60,6 +60,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -71,9 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BoBeneficiario.cs" />
     <Compile Include="BLL\BoCliente.cs" />
+    <Compile Include="DAL\Clientes\DaoBeneficiario.cs" />
     <Compile Include="DAL\Clientes\DaoCliente.cs" />
     <Compile Include="DAL\Padrao\FI.AcessoDados.cs" />
+    <Compile Include="DML\Beneficiario.cs" />
     <Compile Include="DML\Cliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -97,6 +101,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_IncBeneficiario.sql" />
+    <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_ConsBeneficiario.sql" />
+    <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_AltBeneficiario.sql" />
+    <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_DelBeneficiario.sql" />
+    <EmbeddedResource Include="DAL\Clientes\Procedures\FI_SP_VerificaBeneficiario.sql" />
     <Content Include="DAL\Clientes\Procedures\Fl_SP_AddCPFInClienteTable.sql" />
   </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '16.0'">
